@@ -1,7 +1,5 @@
 package FTP_Java;
-import java.io.*;
-import java.net.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args )throws Exception{
@@ -11,10 +9,11 @@ public class Main {
         int choice;
         choice=sc.nextInt();
         if (choice==1){
-            ftp.server();
+                ftp.server();
         }
         if (choice==2){
-            ftp.client();
+                ftp.client();
         }
+        sc.close();
     }
 }

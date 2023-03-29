@@ -9,15 +9,14 @@ import java.util.*;
 
 public class FTP {
     Scanner sc = new Scanner(System.in);
-    public void server()throws Exception{
+    public void server(){
         try{
             Enumeration<NetworkInterface> networkInterfaceEnumeration = NetworkInterface.getNetworkInterfaces();
             for ( InterfaceAddress interfaceAddress : networkInterfaceEnumeration.nextElement().getInterfaceAddresses())
                 if ( interfaceAddress.getAddress().isSiteLocalAddress())
                     System.out.println("IP: "+interfaceAddress.getAddress().getHostAddress());
 
-            String host = InetAddress.getLocalHost().getHostAddress();
-            ServerSocket ss=new ServerSocket(6666);  
+            ServerSocket ss=new ServerSocket(6666);
             Socket s=ss.accept();  
             DataInputStream dis=new DataInputStream(s.getInputStream());  
             String  str=(String)dis.readUTF();  
@@ -29,17 +28,22 @@ public class FTP {
             }  
             }
             
-            public void client()throws Exception{
+            public void client(){
                 try{
                     System.out.println("What is the IP of the Server: ");     
                     String host = sc.next();
                     Socket s=new Socket(host,6666);  
-                    DataOutputStream dout=new DataOutputStream(s.getOutputStream());
-                    System.out.println("Enter the Message: ");
-                    dout.writeUTF(sc.next());
-                    dout.flush();  
-                    dout.close();  
-                    s.close();  
+                    System.out.println("Enter the File Path");
+                    File file = new File(sc.next());
+                    FileInputStream fis = new FileInputStream(file);
+                    BufferedInputStream bis = new BufferedInputStream(fis);
+                    OutputStream os= s.getOutputStream();
+                    //Store Contents in an Array
+                    byte[] contents;
+                    long fileLength = file.length();
+                    long current = 0;
+                    s.close();
+                    ss.close();  
             }
         catch(Exception e){
                 System.out.println(e);
